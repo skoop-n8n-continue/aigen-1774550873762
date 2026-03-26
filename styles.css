@@ -549,3 +549,470 @@ button {
     .bottom-widgets { flex-direction: column; }
     .overlay-content { width: 95%; height: 90%; padding: 2rem; }
 }
+/* -------------------------------------------------------------------------
+   NEW STYLES FOR ENHANCED FEATURES
+   ------------------------------------------------------------------------- */
+
+/* View Switching */
+.view-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.view-section.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.view-title {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    color: var(--color-text-slate);
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+/* 4-Day Weather Forecast */
+.weather-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.weather-current {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.weather-forecast {
+    display: flex;
+    gap: 1.5rem;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.forecast-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--color-text-slate);
+    gap: 0.3rem;
+}
+
+.forecast-day i {
+    color: var(--color-terracotta);
+    font-size: 1.1rem;
+}
+
+.forecast-day span:first-child {
+    font-weight: 700;
+    color: var(--color-text-light);
+}
+
+/* Dining View */
+.dining-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow-y: auto;
+    padding-right: 1rem;
+    padding-bottom: 2rem;
+}
+
+.dining-item {
+    display: flex;
+    background: var(--color-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+}
+
+.dining-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(162, 185, 195, 0.25);
+}
+
+.dining-item img {
+    width: 250px;
+    object-fit: cover;
+}
+
+.dining-info {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+.dining-info h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.dining-info p {
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+/* TV Guide View */
+.tv-guide-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: var(--color-white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--shadow-card);
+    overflow-y: auto;
+    flex: 1;
+}
+
+.tv-channel {
+    display: flex;
+    border-bottom: 1px solid rgba(162, 185, 195, 0.3);
+    padding-bottom: 1rem;
+}
+
+.tv-channel:last-child {
+    border-bottom: none;
+}
+
+.channel-name {
+    width: 120px;
+    font-weight: 700;
+    color: var(--color-text-slate);
+    display: flex;
+    align-items: center;
+}
+
+.tv-programs {
+    display: flex;
+    flex: 1;
+    gap: 1rem;
+    overflow-x: auto;
+}
+
+.program {
+    background: var(--color-bg-sand);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    white-space: nowrap;
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    border-left: 4px solid transparent;
+}
+
+.program.now {
+    background: rgba(162, 185, 195, 0.2);
+    color: var(--color-text-slate);
+    font-weight: 600;
+    border-left-color: var(--color-terracotta);
+}
+
+/* Room Service View */
+.menu-layout {
+    display: flex;
+    gap: 2rem;
+    height: calc(100% - 4rem);
+}
+
+.menu-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 200px;
+}
+
+.menu-cat-btn {
+    padding: 1.2rem;
+    border: none;
+    background: var(--color-white);
+    border-radius: 12px;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+    cursor: pointer;
+    text-align: left;
+    transition: var(--transition-smooth);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+}
+
+.menu-cat-btn.active, .menu-cat-btn:hover {
+    background: var(--color-accent-blue);
+    color: var(--color-white);
+    transform: translateX(10px);
+}
+
+.menu-items-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    overflow-y: auto;
+    padding-right: 1rem;
+    align-content: start;
+}
+
+.menu-item-card {
+    background: var(--color-white);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-item-card h4 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.menu-item-card p {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.menu-item-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.menu-price {
+    font-weight: 700;
+    color: var(--color-terracotta);
+    font-size: 1.2rem;
+}
+
+.add-to-cart-btn {
+    background: var(--color-text-slate);
+    color: var(--color-white);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+.add-to-cart-btn:hover {
+    background: var(--color-terracotta);
+    transform: scale(1.1);
+}
+
+/* Order Cart Sidebar */
+.order-cart {
+    width: 320px;
+    background: var(--color-white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+}
+
+.order-cart h3 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(162, 185, 195, 0.3);
+    padding-bottom: 1rem;
+}
+
+#cart-items {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px dashed rgba(162, 185, 195, 0.4);
+}
+
+.cart-item-info span {
+    display: block;
+}
+
+.cart-item-name {
+    font-weight: 600;
+    color: var(--color-text-slate);
+}
+
+.cart-item-price {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+}
+
+.remove-item-btn {
+    background: none;
+    border: none;
+    color: var(--color-terracotta);
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.empty-cart {
+    color: var(--color-text-light);
+    text-align: center;
+    margin-top: 2rem;
+    font-style: italic;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--color-accent-blue);
+    margin-bottom: 1.5rem;
+}
+
+.place-order-btn {
+    background: var(--color-terracotta);
+    color: var(--color-white);
+    border: none;
+    padding: 1.2rem;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    width: 100%;
+}
+
+.place-order-btn:hover {
+    background: var(--color-terracotta-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(208, 123, 100, 0.3);
+}
+
+/* Custom Modal Inner Content */
+.reservation-form, .spa-schedule-container {
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-light);
+    font-weight: 600;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid rgba(162, 185, 195, 0.5);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    background: var(--color-bg-sand);
+}
+
+.submit-btn {
+    background: var(--color-terracotta);
+    color: var(--color-white);
+    border: none;
+    padding: 1.2rem 2rem;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.spa-schedule {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+.spa-schedule th, .spa-schedule td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(162, 185, 195, 0.3);
+}
+
+.spa-schedule th {
+    font-weight: 700;
+    color: var(--color-text-slate);
+}
+
+.spa-schedule td {
+    color: var(--color-text-light);
+}
+
+.book-class-btn {
+    background: var(--color-accent-blue);
+    color: var(--color-white);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    font-size: 0.9rem;
+}
+
+.book-class-btn:hover {
+    background: var(--color-text-slate);
+}
+
+/* Maps Integration Placeholder */
+.map-placeholder {
+    width: 100%;
+    height: 250px;
+    background-color: #e5e3df;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-light);
+    font-style: italic;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="%23A2B9C3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg>');
+    background-repeat: no-repeat;
+    background-position: center 30%;
+    background-size: 50px;
+}
