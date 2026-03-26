@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Cache busting -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>In-Room Display</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css?v=xyz123">
+</head>
+<body>
+    <div id="app" class="app-container">
+        <!-- Dynamic background gradient -->
+        <div id="dynamic-bg" class="dynamic-bg"></div>
+
+        <!-- Header area -->
+        <header class="header">
+            <div class="header-content">
+                <div class="date-time">
+                    <h2 id="time">10:42 AM</h2>
+                    <p id="date">Tuesday, Oct 24</p>
+                </div>
+                <div class="weather">
+                    <i class="fa-solid fa-cloud-sun weather-icon"></i>
+                    <div class="weather-info">
+                        <span id="temp">72&deg;</span>
+                        <span class="weather-desc">Partly Cloudy</span>
+                    </div>
+                </div>
+            </div>
+            <div class="greeting-container">
+                <p class="greeting-sub">Good Morning,</p>
+                <h1 class="greeting-name">Mr. Raul Jung</h1>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <main class="main-content">
+            <!-- Left Column: Navigation / Quick Actions -->
+            <div class="nav-column">
+                <button class="nav-btn active" data-target="home">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
+                </button>
+                <button class="nav-btn" data-target="dining">
+                    <i class="fa-solid fa-utensils"></i>
+                    <span>Dining</span>
+                </button>
+                <button class="nav-btn" data-target="tv">
+                    <i class="fa-solid fa-tv"></i>
+                    <span>TV Guide</span>
+                </button>
+                <button class="nav-btn highlight-btn" data-target="room-service">
+                    <i class="fa-solid fa-bell-concierge"></i>
+                    <span>Room Service</span>
+                </button>
+            </div>
+
+            <!-- Right/Main Area: Dashboard Widgets -->
+            <div class="dashboard-area">
+
+                <section class="widget-section">
+                    <h3 class="section-title">Discover Local Attractions</h3>
+                    <div class="polaroid-container" id="attractions-container">
+                        <!-- Polaroid Cards injected by JS -->
+                    </div>
+                </section>
+
+                <div class="bottom-widgets">
+                    <section class="widget-card featured-dining">
+                        <div class="card-bg" style="background-image: url('assets/dining.jpg')"></div>
+                        <div class="card-content">
+                            <span class="tag">Recommended</span>
+                            <h3>The Ocean Grill</h3>
+                            <p>Michelin-starred seafood just steps away.</p>
+                            <button class="action-btn">Reserve Table</button>
+                        </div>
+                    </section>
+
+                    <section class="widget-card spa-promo">
+                        <div class="card-bg" style="background-image: url('assets/spa.jpg')"></div>
+                        <div class="card-content">
+                            <span class="tag">Wellness</span>
+                            <h3>Tranquility Spa</h3>
+                            <p>Book your complimentary morning yoga session.</p>
+                            <button class="action-btn">View Schedule</button>
+                        </div>
+                    </section>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Overlay for Expanded Content -->
+        <div id="content-overlay" class="content-overlay hidden">
+            <div class="overlay-backdrop"></div>
+            <div class="overlay-content">
+                <button id="close-overlay" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+                <div id="overlay-body"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js?v=xyz123"></script>
+</body>
+</html>
