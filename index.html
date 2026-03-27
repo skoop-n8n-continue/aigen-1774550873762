@@ -1,302 +1,240 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="manifest" href="./manifest.json" />
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+<head>
+  <link rel="manifest" href="./manifest.json">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- Cache busting -->
-    <meta
-      http-equiv="Cache-Control"
-      content="no-cache, no-store, must-revalidate"
-    />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>In-Room Display</title>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
     <!-- Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.css?v=darklux1" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="styles.css?v=xyz1234">
+</head>
+<body>
     <div id="app" class="app-container">
-      <!-- Dynamic background gradient -->
-      <div id="dynamic-bg" class="dynamic-bg"></div>
+        <!-- Dynamic background gradient -->
+        <div id="dynamic-bg" class="dynamic-bg"></div>
 
-      <!-- Header area -->
-      <header class="header">
-        <div class="header-content">
-          <div class="date-time">
-            <h2 id="time">10:42 AM</h2>
-            <p id="date">Tuesday, Oct 24</p>
-          </div>
-          <div class="weather-container">
-            <div class="weather-current">
-              <i class="fa-solid fa-cloud-sun weather-icon"></i>
-              <div class="weather-info">
-                <span id="temp">72&deg;</span>
-                <span class="weather-desc">Partly Cloudy</span>
-              </div>
+        <!-- Header area -->
+        <header class="header">
+            <div class="header-content">
+                <div class="date-time">
+                    <h2 id="time">10:42 AM</h2>
+                    <p id="date">Tuesday, Oct 24</p>
+                </div>
+                <div class="weather-container">
+                    <div class="weather-current">
+                        <i class="fa-solid fa-cloud-sun weather-icon"></i>
+                        <div class="weather-info">
+                            <span id="temp">72&deg;</span>
+                            <span class="weather-desc">Partly Cloudy</span>
+                        </div>
+                    </div>
+                    <div class="weather-forecast">
+                        <div class="forecast-day"><span>Wed</span><i class="fa-solid fa-sun"></i><span>75&deg;</span></div>
+                        <div class="forecast-day"><span>Thu</span><i class="fa-solid fa-cloud"></i><span>68&deg;</span></div>
+                        <div class="forecast-day"><span>Fri</span><i class="fa-solid fa-cloud-rain"></i><span>65&deg;</span></div>
+                        <div class="forecast-day"><span>Sat</span><i class="fa-solid fa-sun"></i><span>70&deg;</span></div>
+                    </div>
+                </div>
             </div>
-            <div class="weather-forecast">
-              <div class="forecast-day">
-                <span>Wed</span><i class="fa-solid fa-sun"></i
-                ><span>75&deg;</span>
-              </div>
-              <div class="forecast-day">
-                <span>Thu</span><i class="fa-solid fa-cloud"></i
-                ><span>68&deg;</span>
-              </div>
-              <div class="forecast-day">
-                <span>Fri</span><i class="fa-solid fa-cloud-rain"></i
-                ><span>65&deg;</span>
-              </div>
-              <div class="forecast-day">
-                <span>Sat</span><i class="fa-solid fa-sun"></i
-                ><span>70&deg;</span>
-              </div>
+            <div class="greeting-container">
+                <p class="greeting-sub">Good Morning,</p>
+                <h1 class="greeting-name">Mr. Raul Jung</h1>
             </div>
-          </div>
-        </div>
-        <div class="greeting-container">
-          <p class="greeting-sub">Good Morning,</p>
-          <h1 class="greeting-name">Mr. Raul Jung</h1>
-        </div>
-      </header>
+        </header>
 
-      <!-- Main Content Grid -->
-      <main class="main-content">
-        <!-- Left Column: Navigation / Quick Actions -->
-        <div class="nav-column">
-          <button class="nav-btn active" data-target="home">
-            <i class="fa-solid fa-house"></i>
-            <span>Home</span>
-          </button>
-          <button class="nav-btn" data-target="dining">
-            <i class="fa-solid fa-utensils"></i>
-            <span>Dining</span>
-          </button>
-          <button class="nav-btn" data-target="tv">
-            <i class="fa-solid fa-tv"></i>
-            <span>TV Guide</span>
-          </button>
-          <button class="nav-btn highlight-btn" data-target="room-service">
-            <i class="fa-solid fa-bell-concierge"></i>
-            <span>Room Service</span>
-          </button>
-        </div>
-
-        <!-- Right/Main Area: Dashboard Widgets -->
-        <div class="dashboard-area">
-          <!-- HOME VIEW -->
-          <div id="view-home" class="view-section active">
-            <section class="widget-section">
-              <h3 class="section-title">Discover Local Attractions</h3>
-              <div class="polaroid-container" id="attractions-container">
-                <!-- Polaroid Cards injected by JS -->
-              </div>
-            </section>
-
-            <div class="bottom-widgets">
-              <section
-                class="widget-card featured-dining"
-                onclick="openDiningReservation()"
-              >
-                <div
-                  class="card-bg"
-                  style="background-image: url(&quot;assets/dining.jpg?v=darklux1&quot;)"
-                ></div>
-                <div class="card-content">
-                  <span class="tag">Recommended</span>
-                  <h3>The Ocean Grill</h3>
-                  <p>Michelin-starred seafood just steps away.</p>
-                  <button class="action-btn">Reserve Table</button>
-                </div>
-              </section>
-
-              <section
-                class="widget-card spa-promo"
-                onclick="openSpaSchedule()"
-              >
-                <div
-                  class="card-bg"
-                  style="background-image: url(&quot;assets/spa.jpg?v=darklux1&quot;)"
-                ></div>
-                <div class="card-content">
-                  <span class="tag">Wellness</span>
-                  <h3>Tranquility Spa</h3>
-                  <p>Book your complimentary morning yoga session.</p>
-                  <button class="action-btn">View Schedule</button>
-                </div>
-              </section>
-            </div>
-          </div>
-
-          <!-- DINING VIEW -->
-          <div id="view-dining" class="view-section hidden">
-            <h2 class="view-title">Hotel Dining</h2>
-            <div class="dining-list">
-              <div class="dining-item">
-                <img src="assets/dining.jpg?v=darklux1" alt="The Ocean Grill" />
-                <div class="dining-info">
-                  <h3>The Ocean Grill</h3>
-                  <p>Fine seafood dining with ocean views. Open 5PM - 10PM.</p>
-                  <button class="action-btn" onclick="openDiningReservation()">
-                    Reserve Table
-                  </button>
-                </div>
-              </div>
-              <div class="dining-item">
-                <img src="assets/market.jpg?v=darklux1" alt="Market Cafe" />
-                <div class="dining-info">
-                  <h3>Market Cafe</h3>
-                  <p>
-                    Casual breakfast and lunch. Fresh local ingredients. Open
-                    7AM - 3PM.
-                  </p>
-                  <button class="action-btn" onclick="openDiningReservation()">
-                    Reserve Table
-                  </button>
-                </div>
-              </div>
-              <div class="dining-item">
-                <img src="assets/sailing.jpg?v=darklux1" alt="The Horizon Bar" />
-                <div class="dining-info">
-                  <h3>The Horizon Bar</h3>
-                  <p>Craft cocktails and sunset views. Open 4PM - 12AM.</p>
-                  <button class="action-btn" onclick="openDiningReservation()">
-                    Reserve Table
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- TV GUIDE VIEW -->
-          <div id="view-tv" class="view-section hidden">
-            <h2 class="view-title">TV Guide</h2>
-            <div class="tv-guide-container">
-              <div class="tv-channel">
-                <div class="channel-name">01 HBO</div>
-                <div class="tv-programs">
-                  <div class="program now">
-                    Movie: The Matrix (10:00 - 12:30)
-                  </div>
-                  <div class="program">Movie: Inception (12:30 - 15:00)</div>
-                </div>
-              </div>
-              <div class="tv-channel">
-                <div class="channel-name">02 ESPN</div>
-                <div class="tv-programs">
-                  <div class="program now">SportsCenter (10:00 - 11:30)</div>
-                  <div class="program">Live Tennis (11:30 - 14:00)</div>
-                </div>
-              </div>
-              <div class="tv-channel">
-                <div class="channel-name">03 CNN</div>
-                <div class="tv-programs">
-                  <div class="program now">Newsroom (10:00 - 12:00)</div>
-                  <div class="program">Inside Politics (12:00 - 13:00)</div>
-                </div>
-              </div>
-              <div class="tv-channel">
-                <div class="channel-name">04 DISCV</div>
-                <div class="tv-programs">
-                  <div class="program now">Planet Earth (10:00 - 11:00)</div>
-                  <div class="program">Mythbusters (11:00 - 12:00)</div>
-                </div>
-              </div>
-              <div class="tv-channel">
-                <div class="channel-name">05 LOCAL</div>
-                <div class="tv-programs">
-                  <div class="program now">Morning Show (09:00 - 11:00)</div>
-                  <div class="program">Local News (11:00 - 12:00)</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- ROOM SERVICE VIEW -->
-          <div id="view-room-service" class="view-section hidden">
-            <h2 class="view-title">Room Service Menu</h2>
-            <div class="menu-layout">
-              <div class="menu-categories">
-                <button
-                  class="menu-cat-btn active"
-                  onclick="showMenuCat('breakfast')"
-                >
-                  Breakfast
+        <!-- Main Content Grid -->
+        <main class="main-content">
+            <!-- Left Column: Navigation / Quick Actions -->
+            <div class="nav-column">
+                <button class="nav-btn active" data-target="home">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
                 </button>
-                <button class="menu-cat-btn" onclick="showMenuCat('all-day')">
-                  All Day Dining
+                <button class="nav-btn" data-target="dining">
+                    <i class="fa-solid fa-utensils"></i>
+                    <span>Dining</span>
                 </button>
-                <button class="menu-cat-btn" onclick="showMenuCat('beverages')">
-                  Beverages
+                <button class="nav-btn" data-target="tv">
+                    <i class="fa-solid fa-tv"></i>
+                    <span>TV Guide</span>
                 </button>
-              </div>
-              <div class="menu-items-container">
-                <!-- Injected by JS -->
-              </div>
-              <div class="order-cart">
-                <h3>Your Order</h3>
-                <div id="cart-items">
-                  <p class="empty-cart">Cart is empty</p>
-                </div>
-                <div class="cart-total">
-                  <span>Total:</span>
-                  <span id="cart-total-price">$0.00</span>
-                </div>
-                <button class="place-order-btn" onclick="placeOrder()">
-                  Place Order
+                <button class="nav-btn highlight-btn" data-target="room-service">
+                    <i class="fa-solid fa-bell-concierge"></i>
+                    <span>Room Service</span>
                 </button>
-              </div>
             </div>
-          </div>
-        </div>
-      </main>
 
-      <!-- Overlay for Expanded Content -->
-      <div id="content-overlay" class="content-overlay hidden">
-        <div class="overlay-backdrop"></div>
-        <div class="overlay-content">
-          <button id="close-overlay" class="close-btn">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-          <div id="overlay-body"></div>
+            <!-- Right/Main Area: Dashboard Widgets -->
+            <div class="dashboard-area">
+                
+                <!-- HOME VIEW -->
+                <div id="view-home" class="view-section active">
+                    <section class="widget-section">
+                        <h3 class="section-title">Discover Local Attractions</h3>
+                        <div class="polaroid-container" id="attractions-container">
+                            <!-- Polaroid Cards injected by JS -->
+                        </div>
+                    </section>
+
+                    <div class="bottom-widgets">
+                        <section class="widget-card featured-dining" onclick="openDiningReservation()">
+                            <div class="card-bg" style="background-image: url('assets/dining.jpg')"></div>
+                            <div class="card-content">
+                                <span class="tag">Recommended</span>
+                                <h3>The Ocean Grill</h3>
+                                <p>Michelin-starred seafood just steps away.</p>
+                                <button class="action-btn">Reserve Table</button>
+                            </div>
+                        </section>
+
+                        <section class="widget-card spa-promo" onclick="openSpaSchedule()">
+                            <div class="card-bg" style="background-image: url('assets/spa.jpg')"></div>
+                            <div class="card-content">
+                                <span class="tag">Wellness</span>
+                                <h3>Tranquility Spa</h3>
+                                <p>Book your complimentary morning yoga session.</p>
+                                <button class="action-btn">View Schedule</button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- DINING VIEW -->
+                <div id="view-dining" class="view-section hidden">
+                    <h2 class="view-title">Hotel Dining</h2>
+                    <div class="dining-list">
+                        <div class="dining-item">
+                            <img src="assets/dining.jpg" alt="The Ocean Grill">
+                            <div class="dining-info">
+                                <h3>The Ocean Grill</h3>
+                                <p>Fine seafood dining with ocean views. Open 5PM - 10PM.</p>
+                                <button class="action-btn" onclick="openDiningReservation()">Reserve Table</button>
+                            </div>
+                        </div>
+                        <div class="dining-item">
+                            <img src="assets/market.jpg" alt="Market Cafe">
+                            <div class="dining-info">
+                                <h3>Market Cafe</h3>
+                                <p>Casual breakfast and lunch. Fresh local ingredients. Open 7AM - 3PM.</p>
+                                <button class="action-btn" onclick="openDiningReservation()">Reserve Table</button>
+                            </div>
+                        </div>
+                        <div class="dining-item">
+                            <img src="assets/sailing.jpg" alt="The Horizon Bar">
+                            <div class="dining-info">
+                                <h3>The Horizon Bar</h3>
+                                <p>Craft cocktails and sunset views. Open 4PM - 12AM.</p>
+                                <button class="action-btn" onclick="openDiningReservation()">Reserve Table</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TV GUIDE VIEW -->
+                <div id="view-tv" class="view-section hidden">
+                    <h2 class="view-title">TV Guide</h2>
+                    <div class="tv-guide-container">
+                        <div class="tv-channel">
+                            <div class="channel-name">01 HBO</div>
+                            <div class="tv-programs">
+                                <div class="program now">Movie: The Matrix (10:00 - 12:30)</div>
+                                <div class="program">Movie: Inception (12:30 - 15:00)</div>
+                            </div>
+                        </div>
+                        <div class="tv-channel">
+                            <div class="channel-name">02 ESPN</div>
+                            <div class="tv-programs">
+                                <div class="program now">SportsCenter (10:00 - 11:30)</div>
+                                <div class="program">Live Tennis (11:30 - 14:00)</div>
+                            </div>
+                        </div>
+                        <div class="tv-channel">
+                            <div class="channel-name">03 CNN</div>
+                            <div class="tv-programs">
+                                <div class="program now">Newsroom (10:00 - 12:00)</div>
+                                <div class="program">Inside Politics (12:00 - 13:00)</div>
+                            </div>
+                        </div>
+                        <div class="tv-channel">
+                            <div class="channel-name">04 DISCV</div>
+                            <div class="tv-programs">
+                                <div class="program now">Planet Earth (10:00 - 11:00)</div>
+                                <div class="program">Mythbusters (11:00 - 12:00)</div>
+                            </div>
+                        </div>
+                        <div class="tv-channel">
+                            <div class="channel-name">05 LOCAL</div>
+                            <div class="tv-programs">
+                                <div class="program now">Morning Show (09:00 - 11:00)</div>
+                                <div class="program">Local News (11:00 - 12:00)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROOM SERVICE VIEW -->
+                <div id="view-room-service" class="view-section hidden">
+                    <h2 class="view-title">Room Service Menu</h2>
+                    <div class="menu-layout">
+                        <div class="menu-categories">
+                            <button class="menu-cat-btn active" onclick="showMenuCat('breakfast')">Breakfast</button>
+                            <button class="menu-cat-btn" onclick="showMenuCat('all-day')">All Day Dining</button>
+                            <button class="menu-cat-btn" onclick="showMenuCat('beverages')">Beverages</button>
+                        </div>
+                        <div class="menu-items-container">
+                            <!-- Injected by JS -->
+                        </div>
+                        <div class="order-cart">
+                            <h3>Your Order</h3>
+                            <div id="cart-items">
+                                <p class="empty-cart">Cart is empty</p>
+                            </div>
+                            <div class="cart-total">
+                                <span>Total:</span>
+                                <span id="cart-total-price">$0.00</span>
+                            </div>
+                            <button class="place-order-btn" onclick="placeOrder()">Place Order</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Overlay for Expanded Content -->
+        <div id="content-overlay" class="content-overlay hidden">
+            <div class="overlay-backdrop"></div>
+            <div class="overlay-content">
+                <button id="close-overlay" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+                <div id="overlay-body"></div>
+            </div>
         </div>
-      </div>
+
     </div>
 
     <!-- Scripts -->
-    <script src="script.js?v=darklux1"></script>
-    <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", function () {
-          navigator.serviceWorker
-            .register("./sw.js")
-            .then(function (reg) {
-              console.log("[PWA] SW registered:", reg.scope);
-            })
-            .catch(function (err) {
-              console.warn("[PWA] SW registration failed:", err);
-            });
-        });
-      }
-    </script>
-  </body>
+    <script src="script.js?v=xyz1234"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('./sw.js')
+          .then(function (reg) { console.log('[PWA] SW registered:', reg.scope); })
+          .catch(function (err) { console.warn('[PWA] SW registration failed:', err); });
+      });
+    }
+  </script>
+</body>
 </html>
