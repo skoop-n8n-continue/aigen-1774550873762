@@ -31,14 +31,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateTimeBasedUI(currentHour) {
         let greeting = 'Good Morning,';
-        if (currentHour >= 12 && currentHour < 17) greeting = 'Good Afternoon,';
-        else if (currentHour >= 17 && currentHour < 21) greeting = 'Good Evening,';
-        else if (currentHour >= 21 || currentHour < 5) greeting = 'Good Night,';
+        // Define gradients based on time of day
+        let bgGradient = 'linear-gradient(135deg, rgba(249,248,246,1) 0%, rgba(162,185,195,0.4) 100%)'; // Default / Morning
 
-        let bgGradient = 'linear-gradient(135deg, #10181f 0%, #1a252f 100%)'; // Deep NYE Slate
-        document.body.style.color = '#F9F8F6';
-        document.querySelector('.greeting-name').style.color = '#D4AF37'; // Gold
-        timeElement.style.color = '#F9F8F6';
+        if (currentHour >= 5 && currentHour < 12) {
+            greeting = 'Good Morning,';
+            bgGradient = 'linear-gradient(135deg, rgba(249,248,246,1) 0%, rgba(162,185,195,0.5) 100%)'; // Soft Morning Blue
+        } else if (currentHour >= 12 && currentHour < 17) {
+            greeting = 'Good Afternoon,';
+            bgGradient = 'linear-gradient(135deg, rgba(249,248,246,1) 0%, rgba(208,123,100,0.15) 100%)'; // Warm Afternoon Terracotta tint
+        } else if (currentHour >= 17 && currentHour < 21) {
+            greeting = 'Good Evening,';
+            bgGradient = 'linear-gradient(135deg, rgba(220,215,210,1) 0%, rgba(46,58,69,0.3) 100%)'; // Dusk Slate tint
+        } else {
+            greeting = 'Good Night,';
+            bgGradient = 'linear-gradient(135deg, rgba(46,58,69,1) 0%, rgba(20,30,40,1) 100%)'; // Deep Night Slate
+            document.body.style.color = '#F9F8F6';
+            document.querySelector('.greeting-name').style.color = '#F9F8F6';
+            timeElement.style.color = '#F9F8F6';
+        }
 
         greetingElement.textContent = greeting;
         bgElement.style.background = bgGradient;
@@ -47,43 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize and set interval
     updateDateTime();
     setInterval(updateDateTime, 60000); // Update every minute
-
-    // -------------------------------------------------------------------------
-    // 1.5 NYE Countdown Logic
-    // -------------------------------------------------------------------------
-    const cdDays = document.getElementById('cd-days');
-    const cdHours = document.getElementById('cd-hours');
-    const cdMins = document.getElementById('cd-mins');
-    const cdSecs = document.getElementById('cd-secs');
-
-    function updateCountdown() {
-        if (!cdDays) return;
-        const now = new Date();
-        const nextMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
-        const diff = nextMidnight - now;
-
-        if (diff <= 0) {
-            cdDays.textContent = "00";
-            cdHours.textContent = "00";
-            cdMins.textContent = "00";
-            cdSecs.textContent = "00";
-            return;
-        }
-
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        cdDays.textContent = days.toString().padStart(2, "0");
-        cdHours.textContent = hours.toString().padStart(2, "0");
-        cdMins.textContent = minutes.toString().padStart(2, "0");
-        cdSecs.textContent = seconds.toString().padStart(2, "0");
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-
 
     // -------------------------------------------------------------------------
     // 2. View Navigation Logic
@@ -126,35 +100,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const attractions = [
         {
             id: 'attr-1',
-            title: 'Midnight Fireworks',
-            desc: 'Spectacular display over the bay.',
-            img: 'https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1774550873762%2Fassets%2Ffireworks-1774579129971.png',
-            fullDesc: 'Join us on the terrace or view from your room as we light up the sky with a world-class fireworks display to ring in the New Year. The show begins exactly at midnight.',
-            action: 'View Schedule'
+            title: 'Coastal Cliff Walk',
+            desc: 'A scenic 3-mile trail overlooking the ocean.',
+            img: 'assets/cliff-walk.jpg',
+            fullDesc: 'Experience breathtaking panoramic views of the rugged coastline. This moderate 3-mile trail is perfect for a morning run or a leisurely sunset stroll. Keep an eye out for local marine life in the coves below.',
+            action: 'Get Directions'
         },
         {
             id: 'attr-2',
-            title: 'Champagne Toast',
-            desc: 'Complimentary Moët & Chandon.',
-            img: 'https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1774550873762%2Fassets%2Fchampagne-1774579153070.png',
-            fullDesc: 'Enjoy a complimentary glass of vintage champagne at our grand lobby countdown. We will be pouring starting at 11:30 PM.',
-            action: 'RSVP'
+            title: 'Historic Lighthouse',
+            desc: 'Guided tours of the 19th-century beacon.',
+            img: 'assets/lighthouse.jpg',
+            fullDesc: 'Step back in time at the region\'s oldest functioning lighthouse. Climb the 112 spiral steps for a 360-degree view of the bay. Guided tours run every hour on the hour.',
+            action: 'Book Tour'
         },
         {
             id: 'attr-3',
-            title: 'NYE Party Favors',
-            desc: 'Get your hats and noisemakers.',
-            img: 'https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1774550873762%2Fassets%2Ffavors-1774579175078.png',
-            fullDesc: 'We have prepared exclusive gift bags with elegant NYE party favors, including golden top hats, tiaras, and premium noisemakers. Available at the concierge desk.',
-            action: 'Request Delivery'
+            title: 'Artisan Market',
+            desc: 'Local crafts, jewelry, and fresh produce.',
+            img: 'assets/market.jpg',
+            fullDesc: 'Browse stalls from over 50 local artisans and farmers. Find unique handcrafted ceramics, custom jewelry, and taste farm-fresh organic produce. Open Fridays through Sundays.',
+            action: 'View Map'
         },
         {
             id: 'attr-4',
-            title: 'Live DJ Gala',
-            desc: 'Dance into the new year.',
-            img: 'https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1774550873762%2Fassets%2Fdj-1774579195362.png',
-            fullDesc: 'Experience the ultimate NYE party in our grand ballroom with a live international DJ, state-of-the-art laser light show, and premium open bar.',
-            action: 'Get Tickets'
+            title: 'Sunset Sailing',
+            desc: 'Private charter experiences on the bay.',
+            img: 'assets/sailing.jpg',
+            fullDesc: 'Embark on a luxurious 2-hour private catamaran cruise. Enjoy complimentary champagne and hors d\'oeuvres while you watch the sun dip below the horizon.',
+            action: 'Check Availability'
         }
     ];
 
