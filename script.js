@@ -30,17 +30,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateTimeBasedUI(currentHour) {
-        let greeting = 'Happy New Year!';
+        let greeting = 'Good Morning,';
         // Define gradients based on time of day
         let bgGradient = 'linear-gradient(135deg, rgba(249,248,246,1) 0%, rgba(162,185,195,0.4) 100%)'; // Default / Morning
 
         if (currentHour >= 5 && currentHour < 12) {
+            greeting = 'Good Morning,';
             bgGradient = 'linear-gradient(135deg, rgba(249,248,246,1) 0%, rgba(162,185,195,0.5) 100%)'; // Soft Morning Blue
         } else if (currentHour >= 12 && currentHour < 17) {
+            greeting = 'Good Afternoon,';
             bgGradient = 'linear-gradient(135deg, rgba(249,248,246,1) 0%, rgba(208,123,100,0.15) 100%)'; // Warm Afternoon Terracotta tint
         } else if (currentHour >= 17 && currentHour < 21) {
+            greeting = 'Good Evening,';
             bgGradient = 'linear-gradient(135deg, rgba(220,215,210,1) 0%, rgba(46,58,69,0.3) 100%)'; // Dusk Slate tint
         } else {
+            greeting = 'Good Night,';
             bgGradient = 'linear-gradient(135deg, rgba(46,58,69,1) 0%, rgba(20,30,40,1) 100%)'; // Deep Night Slate
             document.body.style.color = '#F9F8F6';
             document.querySelector('.greeting-name').style.color = '#F9F8F6';
@@ -54,51 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize and set interval
     updateDateTime();
     setInterval(updateDateTime, 60000); // Update every minute
-
-    // -------------------------------------------------------------------------
-    // 1.5. Countdown Timer Logic
-    // -------------------------------------------------------------------------
-
-    function updateCountdown() {
-        const now = new Date();
-        const nextYear = now.getFullYear() + (now.getMonth() === 11 && now.getDate() === 31 && now.getHours() >= 0 ? 1 : 0);
-        let targetDate = new Date(`January 1, ${now.getFullYear() + 1} 00:00:00`);
-
-        // If it's already past Jan 1st of the next year somehow, just count to next year
-        if (now.getTime() > targetDate.getTime()) {
-             targetDate = new Date(`January 1, ${now.getFullYear() + 2} 00:00:00`);
-        }
-
-        const difference = targetDate.getTime() - now.getTime();
-
-        if (difference <= 0) {
-            document.getElementById('cd-days').textContent = '00';
-            document.getElementById('cd-hours').textContent = '00';
-            document.getElementById('cd-minutes').textContent = '00';
-            document.getElementById('cd-seconds').textContent = '00';
-            return;
-        }
-
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        const pad = (num) => num.toString().padStart(2, '0');
-
-        const daysEl = document.getElementById('cd-days');
-        const hoursEl = document.getElementById('cd-hours');
-        const minutesEl = document.getElementById('cd-minutes');
-        const secondsEl = document.getElementById('cd-seconds');
-
-        if(daysEl) daysEl.textContent = pad(days);
-        if(hoursEl) hoursEl.textContent = pad(hours);
-        if(minutesEl) minutesEl.textContent = pad(minutes);
-        if(secondsEl) secondsEl.textContent = pad(seconds);
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
 
     // -------------------------------------------------------------------------
     // 2. View Navigation Logic
@@ -141,35 +100,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const attractions = [
         {
             id: 'attr-1',
-            title: 'Midnight Fireworks',
-            desc: 'Spectacular New Year\\'s Eve fireworks display over the city.',
-            img: 'https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1774550873762%2Fassets%2Ffireworks-1774578686893.png',
-            fullDesc: 'Join us for a spectacular fireworks display right as the clock strikes midnight. The colors will illuminate the sky over the city skyline, providing a breathtaking view for an unforgettable New Year\\'s Eve.',
-            action: 'View Schedule'
+            title: 'Coastal Cliff Walk',
+            desc: 'A scenic 3-mile trail overlooking the ocean.',
+            img: 'assets/cliff-walk.jpg',
+            fullDesc: 'Experience breathtaking panoramic views of the rugged coastline. This moderate 3-mile trail is perfect for a morning run or a leisurely sunset stroll. Keep an eye out for local marine life in the coves below.',
+            action: 'Get Directions'
         },
         {
             id: 'attr-2',
-            title: 'Party Favors',
-            desc: 'Get your festive hats, noisemakers, and confetti.',
-            img: 'https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1774550873762%2Fassets%2Fparty_favors-1774578709647.png',
-            fullDesc: 'Prepare for the big moment with our exclusive New Year\\'s Eve party favors. Complimentary glittery hats, noisemakers, and confetti will be available in the lobby starting at 9 PM.',
-            action: 'Reserve Pack'
+            title: 'Historic Lighthouse',
+            desc: 'Guided tours of the 19th-century beacon.',
+            img: 'assets/lighthouse.jpg',
+            fullDesc: 'Step back in time at the region\'s oldest functioning lighthouse. Climb the 112 spiral steps for a 360-degree view of the bay. Guided tours run every hour on the hour.',
+            action: 'Book Tour'
         },
         {
             id: 'attr-3',
-            title: 'Champagne Toast',
-            desc: 'Ring in the new year with a complimentary glass of bubbly.',
-            img: 'https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1774550873762%2Fassets%2Fchampagne_toast-1774578730172.png',
-            fullDesc: 'Join fellow guests for a complimentary champagne toast at midnight in the main hall. Crystal glasses, bubbling champagne, and a festive atmosphere await as we count down to the new year together.',
-            action: 'Join Toast'
+            title: 'Artisan Market',
+            desc: 'Local crafts, jewelry, and fresh produce.',
+            img: 'assets/market.jpg',
+            fullDesc: 'Browse stalls from over 50 local artisans and farmers. Find unique handcrafted ceramics, custom jewelry, and taste farm-fresh organic produce. Open Fridays through Sundays.',
+            action: 'View Map'
         },
         {
             id: 'attr-4',
-            title: 'NYE Gala Dinner',
-            desc: 'An elegant evening of fine dining and celebration.',
-            img: 'https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1774550873762%2Fassets%2Fgala_dinner-1774578752509.png',
-            fullDesc: 'Experience an unforgettable evening at our New Year\\'s Eve Gala Dinner. Enjoy a luxurious multi-course meal, gold and black themed decorations, and a candlelit ambiance.',
-            action: 'Book Table'
+            title: 'Sunset Sailing',
+            desc: 'Private charter experiences on the bay.',
+            img: 'assets/sailing.jpg',
+            fullDesc: 'Embark on a luxurious 2-hour private catamaran cruise. Enjoy complimentary champagne and hors d\'oeuvres while you watch the sun dip below the horizon.',
+            action: 'Check Availability'
         }
     ];
 
