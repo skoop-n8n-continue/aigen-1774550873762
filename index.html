@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.css?v=xyz1234">
+    <link rel="stylesheet" href="styles.css?v=hg8k2j">
 </head>
 <body>
     <div id="app" class="app-container">
@@ -50,8 +50,13 @@
                 </div>
             </div>
             <div class="greeting-container">
-                <p class="greeting-sub">Good Morning,</p>
-                <h1 class="greeting-name">Mr. Raul Jung</h1>
+                <div class="honeymoon-banner">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>Honeymoon Suite</span>
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <p class="greeting-sub">Congratulations,</p>
+                <h1 class="greeting-name">Mr. &amp; Mrs. Jung</h1>
             </div>
         </header>
 
@@ -83,7 +88,7 @@
                 <!-- HOME VIEW -->
                 <div id="view-home" class="view-section active">
                     <section class="widget-section">
-                        <h3 class="section-title">Discover Local Attractions</h3>
+                        <h3 class="section-title">Curated Couples Experiences</h3>
                         <div class="polaroid-container" id="attractions-container">
                             <!-- Polaroid Cards injected by JS -->
                         </div>
@@ -93,9 +98,9 @@
                         <section class="widget-card featured-dining" onclick="openDiningReservation()">
                             <div class="card-bg" style="background-image: url('assets/dining.jpg')"></div>
                             <div class="card-content">
-                                <span class="tag">Recommended</span>
-                                <h3>The Ocean Grill</h3>
-                                <p>Michelin-starred seafood just steps away.</p>
+                                <span class="tag">Romantic Dining</span>
+                                <h3>Candlelit Ocean Grill</h3>
+                                <p>Michelin-starred seafood, perfectly curated for two.</p>
                                 <button class="action-btn">Reserve Table</button>
                             </div>
                         </section>
@@ -103,9 +108,9 @@
                         <section class="widget-card spa-promo" onclick="openSpaSchedule()">
                             <div class="card-bg" style="background-image: url('assets/spa.jpg')"></div>
                             <div class="card-content">
-                                <span class="tag">Wellness</span>
-                                <h3>Tranquility Spa</h3>
-                                <p>Book your complimentary morning yoga session.</p>
+                                <span class="tag">Couples Wellness</span>
+                                <h3>Couples Spa Oasis</h3>
+                                <p>Book your private couple's massage and thermal suite.</p>
                                 <button class="action-btn">View Schedule</button>
                             </div>
                         </section>
@@ -226,7 +231,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="script.js?v=xyz1234"></script>
+    <script src="script.js?v=hg8k2j"></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {

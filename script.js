@@ -30,21 +30,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateTimeBasedUI(currentHour) {
-        let greeting = 'Good Morning,';
+        let greeting = 'Congratulations,';
         // Define gradients based on time of day
         let bgGradient = 'linear-gradient(135deg, rgba(249,248,246,1) 0%, rgba(162,185,195,0.4) 100%)'; // Default / Morning
 
         if (currentHour >= 5 && currentHour < 12) {
-            greeting = 'Good Morning,';
+            greeting = 'Congratulations,';
             bgGradient = 'linear-gradient(135deg, rgba(249,248,246,1) 0%, rgba(162,185,195,0.5) 100%)'; // Soft Morning Blue
         } else if (currentHour >= 12 && currentHour < 17) {
-            greeting = 'Good Afternoon,';
+            greeting = 'Congratulations,';
             bgGradient = 'linear-gradient(135deg, rgba(249,248,246,1) 0%, rgba(208,123,100,0.15) 100%)'; // Warm Afternoon Terracotta tint
         } else if (currentHour >= 17 && currentHour < 21) {
-            greeting = 'Good Evening,';
+            greeting = 'Congratulations,';
             bgGradient = 'linear-gradient(135deg, rgba(220,215,210,1) 0%, rgba(46,58,69,0.3) 100%)'; // Dusk Slate tint
         } else {
-            greeting = 'Good Night,';
+            greeting = 'Congratulations,';
             bgGradient = 'linear-gradient(135deg, rgba(46,58,69,1) 0%, rgba(20,30,40,1) 100%)'; // Deep Night Slate
             document.body.style.color = '#F9F8F6';
             document.querySelector('.greeting-name').style.color = '#F9F8F6';
@@ -100,35 +100,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const attractions = [
         {
             id: 'attr-1',
-            title: 'Coastal Cliff Walk',
-            desc: 'A scenic 3-mile trail overlooking the ocean.',
-            img: 'assets/cliff-walk.jpg',
-            fullDesc: 'Experience breathtaking panoramic views of the rugged coastline. This moderate 3-mile trail is perfect for a morning run or a leisurely sunset stroll. Keep an eye out for local marine life in the coves below.',
-            action: 'Get Directions'
-        },
-        {
-            id: 'attr-2',
-            title: 'Historic Lighthouse',
-            desc: 'Guided tours of the 19th-century beacon.',
-            img: 'assets/lighthouse.jpg',
-            fullDesc: 'Step back in time at the region\'s oldest functioning lighthouse. Climb the 112 spiral steps for a 360-degree view of the bay. Guided tours run every hour on the hour.',
-            action: 'Book Tour'
-        },
-        {
-            id: 'attr-3',
-            title: 'Artisan Market',
-            desc: 'Local crafts, jewelry, and fresh produce.',
-            img: 'assets/market.jpg',
-            fullDesc: 'Browse stalls from over 50 local artisans and farmers. Find unique handcrafted ceramics, custom jewelry, and taste farm-fresh organic produce. Open Fridays through Sundays.',
-            action: 'View Map'
-        },
-        {
-            id: 'attr-4',
             title: 'Sunset Sailing',
-            desc: 'Private charter experiences on the bay.',
+            desc: 'Private catamaran cruise on the bay.',
             img: 'assets/sailing.jpg',
             fullDesc: 'Embark on a luxurious 2-hour private catamaran cruise. Enjoy complimentary champagne and hors d\'oeuvres while you watch the sun dip below the horizon.',
             action: 'Check Availability'
+        },
+        {
+            id: 'attr-2',
+            title: 'Couples Spa Package',
+            desc: 'Ultimate relaxation for two.',
+            img: 'assets/spa.jpg',
+            fullDesc: 'Indulge in a 90-minute couples massage followed by exclusive access to the private thermal suite, complete with champagne and chocolate-covered strawberries.',
+            action: 'Book Spa'
+        },
+        {
+            id: 'attr-3',
+            title: 'Candlelit Dining',
+            desc: 'Private beachside dinner under the stars.',
+            img: 'assets/dining.jpg',
+            fullDesc: 'A private table set on the beach with a curated 5-course tasting menu and wine pairing, served by a dedicated private butler as the waves crash nearby.',
+            action: 'Reserve Table'
         }
     ];
 
