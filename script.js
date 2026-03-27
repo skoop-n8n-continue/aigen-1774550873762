@@ -32,22 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateTimeBasedUI(currentHour) {
         let greeting = 'Congratulations,';
         // Define gradients based on time of day
-        let bgGradient = 'linear-gradient(135deg, rgba(249,248,246,1) 0%, rgba(162,185,195,0.4) 100%)'; // Default / Morning
+        let bgGradient = 'linear-gradient(135deg, #FCFBF9 0%, rgba(244,208,208,0.4) 100%)'; // Default / Morning Blush
 
         if (currentHour >= 5 && currentHour < 12) {
-            greeting = 'Congratulations,';
-            bgGradient = 'linear-gradient(135deg, rgba(249,248,246,1) 0%, rgba(162,185,195,0.5) 100%)'; // Soft Morning Blue
+            bgGradient = 'linear-gradient(135deg, #FCFBF9 0%, rgba(244,208,208,0.5) 100%)'; // Morning Blush
         } else if (currentHour >= 12 && currentHour < 17) {
-            greeting = 'Congratulations,';
-            bgGradient = 'linear-gradient(135deg, rgba(249,248,246,1) 0%, rgba(208,123,100,0.15) 100%)'; // Warm Afternoon Terracotta tint
+            bgGradient = 'linear-gradient(135deg, #FCFBF9 0%, rgba(212,175,55,0.15) 100%)'; // Afternoon Gold
         } else if (currentHour >= 17 && currentHour < 21) {
-            greeting = 'Congratulations,';
-            bgGradient = 'linear-gradient(135deg, rgba(220,215,210,1) 0%, rgba(46,58,69,0.3) 100%)'; // Dusk Slate tint
+            bgGradient = 'linear-gradient(135deg, #F0E6E6 0%, rgba(140,120,130,0.3) 100%)'; // Dusk Mauve
         } else {
-            greeting = 'Congratulations,';
-            bgGradient = 'linear-gradient(135deg, rgba(46,58,69,1) 0%, rgba(20,30,40,1) 100%)'; // Deep Night Slate
+            bgGradient = 'linear-gradient(135deg, rgba(40,35,45,1) 0%, rgba(20,15,25,1) 100%)'; // Deep Night
             document.body.style.color = '#F9F8F6';
-            document.querySelector('.greeting-name').style.color = '#F9F8F6';
+            document.querySelector('.greeting-name').style.color = '#D4AF37'; // Gold text at night
             timeElement.style.color = '#F9F8F6';
         }
 
@@ -133,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.setAttribute('data-id', attr.id);
 
             card.innerHTML = `
-                <img src="${attr.img}" alt="${attr.title}" class="polaroid-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%23A2B9C3\\'/></svg>'">
+                <img src="${attr.img}" alt="${attr.title}" class="polaroid-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%23F4D0D0\\'/></svg>'">
                 <h4 class="polaroid-title">${attr.title}</h4>
                 <p class="polaroid-desc">${attr.desc}</p>
             `;
@@ -256,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         overlayBody.innerHTML = `
-            <img src="${data.img}" alt="${data.title}" class="expanded-detail-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%23A2B9C3\\'/></svg>'">
+            <img src="${data.img}" alt="${data.title}" class="expanded-detail-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%23F4D0D0\\'/></svg>'">
             <h2 class="expanded-detail-title">${data.title}</h2>
             <p class="expanded-detail-text">${data.fullDesc}</p>
             ${actionHTML}
