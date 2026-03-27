@@ -1,19 +1,19 @@
 /* Variables & Base Styles */
 :root {
-    --color-bg-sand: #F9F8F6;
-    --color-accent-blue: #A2B9C3;
-    --color-terracotta: #D07B64;
-    --color-terracotta-hover: #b96b56;
-    --color-text-slate: #2E3A45;
-    --color-text-light: #6A7C8C;
-    --color-white: #FFFFFF;
+    --color-bg-sand: #10181f;
+    --color-accent-blue: #D4AF37;
+    --color-terracotta: #F4D03F;
+    --color-terracotta-hover: #F1C40F;
+    --color-text-slate: #F9F8F6;
+    --color-text-light: #BDBDBD;
+    --color-white: #1f2a33;
 
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Lato', sans-serif;
 
     --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    --shadow-soft: 0 10px 30px rgba(46, 58, 69, 0.1);
-    --shadow-card: 0 20px 40px rgba(162, 185, 195, 0.15);
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --shadow-card: 0 20px 40px rgba(212, 175, 55, 0.15);
 }
 
 * {
@@ -62,7 +62,7 @@ button {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background: linear-gradient(135deg, rgba(249,248,246,1) 0%, rgba(162,185,195,0.4) 100%);
+    background: linear-gradient(135deg, #10181f 0%, #1a252f 100%);
     transition: background 2s ease;
 }
 
@@ -102,7 +102,7 @@ button {
     display: flex;
     align-items: center;
     gap: 1rem;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(31, 42, 51, 0.6);
     padding: 0.8rem 1.2rem;
     border-radius: 50px;
     backdrop-filter: blur(10px);
@@ -172,7 +172,7 @@ button {
     font-size: 1.1rem;
     color: var(--color-text-light);
     transition: var(--transition-smooth);
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(31, 42, 51, 0.3);
 }
 
 .nav-btn i {
@@ -182,13 +182,13 @@ button {
 }
 
 .nav-btn:hover {
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(31, 42, 51, 0.6);
     color: var(--color-text-slate);
     transform: translateX(5px);
 }
 
 .nav-btn.active {
-    background: var(--color-white);
+    background: var(--color-white); border: 1px solid rgba(212,175,55,0.2);
     color: var(--color-text-slate);
     box-shadow: var(--shadow-soft);
     font-weight: 700;
@@ -212,7 +212,7 @@ button {
     background: var(--color-terracotta-hover);
     color: var(--color-white);
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(208, 123, 100, 0.3);
+    box-shadow: 0 10px 20px rgba(244, 208, 63, 0.3);
 }
 
 /* Right Dashboard Area */
@@ -251,7 +251,7 @@ button {
 .polaroid-card {
     min-width: 280px;
     height: 340px;
-    background: var(--color-white);
+    background: var(--color-white); border: 1px solid rgba(212,175,55,0.2);
     padding: 1rem;
     border-radius: 12px;
     box-shadow: var(--shadow-card);
@@ -273,7 +273,7 @@ button {
 
 .polaroid-card:hover {
     transform: translateY(-15px) rotate(0deg) scale(1.02);
-    box-shadow: 0 30px 60px rgba(162, 185, 195, 0.3);
+    box-shadow: 0 30px 60px rgba(212, 175, 55, 0.3);
     z-index: 10;
 }
 
@@ -321,7 +321,7 @@ button {
 
 .widget-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(46, 58, 69, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 .card-bg {
@@ -362,7 +362,7 @@ button {
 .tag {
     display: inline-block;
     padding: 0.3rem 0.8rem;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(31, 42, 51, 0.2);
     backdrop-filter: blur(5px);
     border-radius: 30px;
     font-size: 0.75rem;
@@ -390,7 +390,7 @@ button {
 
 .action-btn {
     padding: 0.6rem 1.2rem;
-    background: var(--color-white);
+    background: var(--color-white); border: 1px solid rgba(212,175,55,0.2);
     color: var(--color-text-slate);
     border-radius: 30px;
     font-weight: 700;
@@ -429,7 +429,7 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(46, 58, 69, 0.6);
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(15px);
 }
 
@@ -460,7 +460,7 @@ button {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: rgba(46, 58, 69, 0.1);
+    background: rgba(0, 0, 0, 0.1);
     color: var(--color-text-slate);
     font-size: 1.2rem;
     display: flex;
@@ -515,7 +515,7 @@ button {
 .expanded-action:hover {
     background: var(--color-terracotta-hover);
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(208, 123, 100, 0.3);
+    box-shadow: 0 10px 20px rgba(244, 208, 63, 0.3);
 }
 
 /* Responsive adjustments */
@@ -595,7 +595,7 @@ button {
 .weather-forecast {
     display: flex;
     gap: 1.5rem;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(31, 42, 51, 0.5);
     padding: 0.8rem 1.2rem;
     border-radius: 12px;
     backdrop-filter: blur(5px);
@@ -633,7 +633,7 @@ button {
 
 .dining-item {
     display: flex;
-    background: var(--color-white);
+    background: var(--color-white); border: 1px solid rgba(212,175,55,0.2);
     border-radius: 16px;
     overflow: hidden;
     box-shadow: var(--shadow-card);
@@ -642,7 +642,7 @@ button {
 
 .dining-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 25px 50px rgba(162, 185, 195, 0.25);
+    box-shadow: 0 25px 50px rgba(212, 175, 55, 0.25);
 }
 
 .dining-item img {
@@ -675,7 +675,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    background: var(--color-white);
+    background: var(--color-white); border: 1px solid rgba(212,175,55,0.2);
     border-radius: 16px;
     padding: 2rem;
     box-shadow: var(--shadow-card);
@@ -685,7 +685,7 @@ button {
 
 .tv-channel {
     display: flex;
-    border-bottom: 1px solid rgba(162, 185, 195, 0.3);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
     padding-bottom: 1rem;
 }
 
@@ -719,7 +719,7 @@ button {
 }
 
 .program.now {
-    background: rgba(162, 185, 195, 0.2);
+    background: rgba(212, 175, 55, 0.2);
     color: var(--color-text-slate);
     font-weight: 600;
     border-left-color: var(--color-terracotta);
@@ -742,7 +742,7 @@ button {
 .menu-cat-btn {
     padding: 1.2rem;
     border: none;
-    background: var(--color-white);
+    background: var(--color-white); border: 1px solid rgba(212,175,55,0.2);
     border-radius: 12px;
     font-family: var(--font-body);
     font-size: 1.1rem;
@@ -770,7 +770,7 @@ button {
 }
 
 .menu-item-card {
-    background: var(--color-white);
+    background: var(--color-white); border: 1px solid rgba(212,175,55,0.2);
     border-radius: 16px;
     padding: 1.5rem;
     box-shadow: var(--shadow-card);
@@ -827,7 +827,7 @@ button {
 /* Order Cart Sidebar */
 .order-cart {
     width: 320px;
-    background: var(--color-white);
+    background: var(--color-white); border: 1px solid rgba(212,175,55,0.2);
     border-radius: 16px;
     padding: 2rem;
     box-shadow: var(--shadow-card);
@@ -839,7 +839,7 @@ button {
     font-family: var(--font-heading);
     font-size: 1.6rem;
     margin-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(162, 185, 195, 0.3);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
     padding-bottom: 1rem;
 }
 
@@ -856,7 +856,7 @@ button {
     justify-content: space-between;
     align-items: center;
     padding-bottom: 0.8rem;
-    border-bottom: 1px dashed rgba(162, 185, 195, 0.4);
+    border-bottom: 1px dashed rgba(212, 175, 55, 0.4);
 }
 
 .cart-item-info span {
@@ -917,7 +917,7 @@ button {
 .place-order-btn:hover {
     background: var(--color-terracotta-hover);
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(208, 123, 100, 0.3);
+    box-shadow: 0 10px 20px rgba(244, 208, 63, 0.3);
 }
 
 /* Custom Modal Inner Content */
@@ -941,7 +941,7 @@ button {
 .form-group input, .form-group select {
     width: 100%;
     padding: 1rem;
-    border: 1px solid rgba(162, 185, 195, 0.5);
+    border: 1px solid rgba(212, 175, 55, 0.5);
     border-radius: 8px;
     font-family: var(--font-body);
     font-size: 1rem;
@@ -972,7 +972,7 @@ button {
 .spa-schedule th, .spa-schedule td {
     padding: 1rem;
     text-align: left;
-    border-bottom: 1px solid rgba(162, 185, 195, 0.3);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 .spa-schedule th {
@@ -1003,7 +1003,7 @@ button {
 .map-placeholder {
     width: 100%;
     height: 250px;
-    background-color: #e5e3df;
+    background-color: #1a252f;
     border-radius: 12px;
     margin-bottom: 1.5rem;
     display: flex;
@@ -1016,3 +1016,71 @@ button {
     background-position: center 30%;
     background-size: 50px;
 }
+
+/* NYE Countdown Styles */
+.countdown-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+}
+
+.countdown-container {
+    text-align: center;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid var(--color-accent-blue);
+    padding: 2rem 4rem;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+.countdown-container h3 {
+    color: var(--color-accent-blue);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.countdown-timer {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.time-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.time-box span:first-child {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--color-text-slate);
+    font-family: var(--font-heading);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.time-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: var(--color-accent-blue);
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+}
+
+.colon {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--color-accent-blue);
+    margin-top: -1.5rem;
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
