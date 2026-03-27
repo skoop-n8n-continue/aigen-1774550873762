@@ -1,206 +1,160 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // -------------------------------------------------------------------------
-    // 1. Time, Date, and Dynamic Background Logic
-    // -------------------------------------------------------------------------
-
-    const timeElement = document.getElementById('time');
-    const dateElement = document.getElementById('date');
-    const greetingElement = document.querySelector('.greeting-sub');
-    const bgElement = document.getElementById('dynamic-bg');
-
-    function updateDateTime() {
-        const now = new Date();
-
-        // Format Time
-        let hours = now.getHours();
-        let minutes = now.getMinutes();
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12; // the hour '0' should be '12'
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        const timeString = hours + ':' + minutes + ' ' + ampm;
-        timeElement.textContent = timeString;
-
-        // Format Date
-        const options = { weekday: 'long', month: 'short', day: 'numeric' };
-        const dateString = now.toLocaleDateString('en-US', options);
-        dateElement.textContent = dateString;
-
-        updateTimeBasedUI(now.getHours());
+document.addEventListener("DOMContentLoaded", () => {
+  // -------------------------------------------------------------------------
+  // 1. Time, Date, and Dynamic Background Logic
+  // -------------------------------------------------------------------------
+  const timeElement = document.getElementById("time");
+  const dateElement = document.getElementById("date");
+  const greetingElement = document.querySelector(".greeting-sub");
+  const bgElement = document.getElementById("dynamic-bg");
+  function updateDateTime() {
+    const now = new Date();
+    // Format Time
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    const timeString = hours + ":" + minutes + " " + ampm;
+    timeElement.textContent = timeString;
+    // Format Date
+    const options = { weekday: "long", month: "short", day: "numeric" };
+    const dateString = now.toLocaleDateString("en-US", options);
+    dateElement.textContent = dateString;
+    updateTimeBasedUI(now.getHours());
+  }
+  function updateTimeBasedUI(currentHour) {
+    let greeting = "Good Morning,";
+    // Define gradients based on time of day
+    let bgGradient =
+      "linear-gradient(135deg, rgba(17,19,21,1) 0%, rgba(35,30,22,1) 100%)"; // Default / Morning
+    if (currentHour >= 5 && currentHour < 12) {
+      greeting = "Good Morning,";
+      bgGradient =
+        "linear-gradient(135deg, rgba(17,19,21,1) 0%, rgba(40,35,28,1) 100%)"; // Soft Morning Blue
+    } else if (currentHour >= 12 && currentHour < 17) {
+      greeting = "Good Afternoon,";
+      bgGradient =
+        "linear-gradient(135deg, rgba(17,19,21,1) 0%, rgba(45,35,20,1) 100%)"; // Warm Afternoon Terracotta tint
+    } else if (currentHour >= 17 && currentHour < 21) {
+      greeting = "Good Evening,";
+      bgGradient =
+        "linear-gradient(135deg, rgba(17,19,21,1) 0%, rgba(20,20,20,1) 100%)"; // Dusk Slate tint
+    } else {
+      greeting = "Good Night,";
+      bgGradient =
+        "linear-gradient(135deg, rgba(10,11,12,1) 0%, rgba(5,5,5,1) 100%)"; // Deep Night Slate
     }
-
-    function updateTimeBasedUI(currentHour) {
-        let greeting = 'Good Morning,';
-        if (currentHour >= 12 && currentHour < 17) greeting = 'Good Afternoon,';
-        else if (currentHour >= 17 && currentHour < 21) greeting = 'Good Evening,';
-        else if (currentHour >= 21 || currentHour < 5) greeting = 'Good Night,';
-
-        let bgGradient = 'linear-gradient(135deg, #10181f 0%, #1a252f 100%)'; // Deep NYE Slate
-        document.body.style.color = '#F9F8F6';
-        document.querySelector('.greeting-name').style.color = '#D4AF37'; // Gold
-        timeElement.style.color = '#F9F8F6';
-
-        greetingElement.textContent = greeting;
-        bgElement.style.background = bgGradient;
-    }
-
-    // Initialize and set interval
-    updateDateTime();
-    setInterval(updateDateTime, 60000); // Update every minute
-
-    // -------------------------------------------------------------------------
-    // 1.5 NYE Countdown Logic
-    // -------------------------------------------------------------------------
-    const cdDays = document.getElementById('cd-days');
-    const cdHours = document.getElementById('cd-hours');
-    const cdMins = document.getElementById('cd-mins');
-    const cdSecs = document.getElementById('cd-secs');
-
-    function updateCountdown() {
-        if (!cdDays) return;
-        const now = new Date();
-        const nextMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
-        const diff = nextMidnight - now;
-
-        if (diff <= 0) {
-            cdDays.textContent = "00";
-            cdHours.textContent = "00";
-            cdMins.textContent = "00";
-            cdSecs.textContent = "00";
-            return;
+    greetingElement.textContent = greeting;
+    bgElement.style.background = bgGradient;
+  }
+  // Initialize and set interval
+  updateDateTime();
+  setInterval(updateDateTime, 60000); // Update every minute
+  // -------------------------------------------------------------------------
+  // 2. View Navigation Logic
+  // -------------------------------------------------------------------------
+  const navButtons = document.querySelectorAll(".nav-btn");
+  const viewSections = document.querySelectorAll(".view-section");
+  navButtons.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      // Remove active from all buttons
+      navButtons.forEach((b) => b.classList.remove("active"));
+      // Add to clicked
+      const targetBtn = e.currentTarget;
+      targetBtn.classList.add("active");
+      // Simple animation feedback
+      targetBtn.style.transform = "scale(0.95)";
+      setTimeout(() => {
+        targetBtn.style.transform = "";
+      }, 150);
+      // Switch Views
+      const targetViewId = "view-" + targetBtn.dataset.target;
+      viewSections.forEach((section) => {
+        if (section.id === targetViewId) {
+          section.classList.remove("hidden");
+        } else {
+          section.classList.add("hidden");
         }
-
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        cdDays.textContent = days.toString().padStart(2, "0");
-        cdHours.textContent = hours.toString().padStart(2, "0");
-        cdMins.textContent = minutes.toString().padStart(2, "0");
-        cdSecs.textContent = seconds.toString().padStart(2, "0");
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-
-
-    // -------------------------------------------------------------------------
-    // 2. View Navigation Logic
-    // -------------------------------------------------------------------------
-    
-    const navButtons = document.querySelectorAll('.nav-btn');
-    const viewSections = document.querySelectorAll('.view-section');
-
-    navButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            // Remove active from all buttons
-            navButtons.forEach(b => b.classList.remove('active'));
-            
-            // Add to clicked
-            const targetBtn = e.currentTarget;
-            targetBtn.classList.add('active');
-
-            // Simple animation feedback
-            targetBtn.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                targetBtn.style.transform = '';
-            }, 150);
-
-            // Switch Views
-            const targetViewId = 'view-' + targetBtn.dataset.target;
-            viewSections.forEach(section => {
-                if(section.id === targetViewId) {
-                    section.classList.remove('hidden');
-                } else {
-                    section.classList.add('hidden');
-                }
-            });
-        });
+      });
     });
-
-    // -------------------------------------------------------------------------
-    // 3. Mock Data & Content Injection (Home View)
-    // -------------------------------------------------------------------------
-
-    const attractions = [
-        {
-            id: 'attr-1',
-            title: 'Midnight Fireworks',
-            desc: 'Spectacular display over the bay.',
-            img: 'https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1774550873762%2Fassets%2Ffireworks-1774579129971.png',
-            fullDesc: 'Join us on the terrace or view from your room as we light up the sky with a world-class fireworks display to ring in the New Year. The show begins exactly at midnight.',
-            action: 'View Schedule'
-        },
-        {
-            id: 'attr-2',
-            title: 'Champagne Toast',
-            desc: 'Complimentary Moët & Chandon.',
-            img: 'https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1774550873762%2Fassets%2Fchampagne-1774579153070.png',
-            fullDesc: 'Enjoy a complimentary glass of vintage champagne at our grand lobby countdown. We will be pouring starting at 11:30 PM.',
-            action: 'RSVP'
-        },
-        {
-            id: 'attr-3',
-            title: 'NYE Party Favors',
-            desc: 'Get your hats and noisemakers.',
-            img: 'https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1774550873762%2Fassets%2Ffavors-1774579175078.png',
-            fullDesc: 'We have prepared exclusive gift bags with elegant NYE party favors, including golden top hats, tiaras, and premium noisemakers. Available at the concierge desk.',
-            action: 'Request Delivery'
-        },
-        {
-            id: 'attr-4',
-            title: 'Live DJ Gala',
-            desc: 'Dance into the new year.',
-            img: 'https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1774550873762%2Fassets%2Fdj-1774579195362.png',
-            fullDesc: 'Experience the ultimate NYE party in our grand ballroom with a live international DJ, state-of-the-art laser light show, and premium open bar.',
-            action: 'Get Tickets'
-        }
-    ];
-
-    const container = document.getElementById('attractions-container');
-
-    function renderAttractions() {
-        attractions.forEach((attr) => {
-            const card = document.createElement('div');
-            card.className = 'polaroid-card';
-            card.setAttribute('data-id', attr.id);
-
-            card.innerHTML = `
-                <img src="${attr.img}" alt="${attr.title}" class="polaroid-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%23A2B9C3\\'/></svg>'">
+  });
+  // -------------------------------------------------------------------------
+  // 3. Mock Data & Content Injection (Home View)
+  // -------------------------------------------------------------------------
+  const attractions = [
+    {
+      id: "attr-1",
+      title: "Coastal Cliff Walk",
+      desc: "A scenic 3-mile trail overlooking the ocean.",
+      img: "assets/cliff-walk.jpg?v=darklux1",
+      fullDesc:
+        "Experience breathtaking panoramic views of the rugged coastline. This moderate 3-mile trail is perfect for a morning run or a leisurely sunset stroll. Keep an eye out for local marine life in the coves below.",
+      action: "Get Directions",
+    },
+    {
+      id: "attr-2",
+      title: "Historic Lighthouse",
+      desc: "Guided tours of the 19th-century beacon.",
+      img: "assets/lighthouse.jpg?v=darklux1",
+      fullDesc:
+        "Step back in time at the region's oldest functioning lighthouse. Climb the 112 spiral steps for a 360-degree view of the bay. Guided tours run every hour on the hour.",
+      action: "Book Tour",
+    },
+    {
+      id: "attr-3",
+      title: "Artisan Market",
+      desc: "Local crafts, jewelry, and fresh produce.",
+      img: "assets/market.jpg?v=darklux1",
+      fullDesc:
+        "Browse stalls from over 50 local artisans and farmers. Find unique handcrafted ceramics, custom jewelry, and taste farm-fresh organic produce. Open Fridays through Sundays.",
+      action: "View Map",
+    },
+    {
+      id: "attr-4",
+      title: "Sunset Sailing",
+      desc: "Private charter experiences on the bay.",
+      img: "assets/sailing.jpg?v=darklux1",
+      fullDesc:
+        "Embark on a luxurious 2-hour private catamaran cruise. Enjoy complimentary champagne and hors d'oeuvres while you watch the sun dip below the horizon.",
+      action: "Check Availability",
+    },
+  ];
+  const container = document.getElementById("attractions-container");
+  function renderAttractions() {
+    attractions.forEach((attr) => {
+      const card = document.createElement("div");
+      card.className = "polaroid-card";
+      card.setAttribute("data-id", attr.id);
+      card.innerHTML = `
+                <img src="${attr.img}" alt="${attr.title}" class="polaroid-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%231A1D20\\'/></svg>'">
                 <h4 class="polaroid-title">${attr.title}</h4>
                 <p class="polaroid-desc">${attr.desc}</p>
             `;
-
-            // Add click listener to open details
-            card.addEventListener('click', () => openAttractionOverlay(attr));
-            container.appendChild(card);
-        });
-    }
-
-    renderAttractions();
-
-    // -------------------------------------------------------------------------
-    // 4. Interactive Overlay Logic (Global)
-    // -------------------------------------------------------------------------
-
-    const overlay = document.getElementById('content-overlay');
-    const closeBtn = document.getElementById('close-overlay');
-    const overlayBody = document.getElementById('overlay-body');
-
-    function closeOverlay() {
-        overlay.classList.add('hidden');
-    }
-
-    closeBtn.addEventListener('click', closeOverlay);
-    document.querySelector('.overlay-backdrop').addEventListener('click', closeOverlay);
-
-    // Global expose functions for inline onclick attributes
-    window.openDiningReservation = function() {
-        overlayBody.innerHTML = `
+      // Add click listener to open details
+      card.addEventListener("click", () => openAttractionOverlay(attr));
+      container.appendChild(card);
+    });
+  }
+  renderAttractions();
+  // -------------------------------------------------------------------------
+  // 4. Interactive Overlay Logic (Global)
+  // -------------------------------------------------------------------------
+  const overlay = document.getElementById("content-overlay");
+  const closeBtn = document.getElementById("close-overlay");
+  const overlayBody = document.getElementById("overlay-body");
+  function closeOverlay() {
+    overlay.classList.add("hidden");
+  }
+  closeBtn.addEventListener("click", closeOverlay);
+  document
+    .querySelector(".overlay-backdrop")
+    .addEventListener("click", closeOverlay);
+  // Global expose functions for inline onclick attributes
+  window.openDiningReservation = function () {
+    overlayBody.innerHTML = `
             <h2 class="expanded-detail-title">Reserve a Table</h2>
             <p class="expanded-detail-text">Book your dining experience instantly.</p>
-            
             <div class="reservation-form">
                 <div class="form-group">
                     <label>Restaurant</label>
@@ -231,14 +185,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <button class="submit-btn" onclick="alert('Reservation Confirmed! You will receive a notification shortly.'); document.getElementById('close-overlay').click();">Confirm Reservation</button>
             </div>
         `;
-        overlay.classList.remove('hidden');
-    };
-
-    window.openSpaSchedule = function() {
-        overlayBody.innerHTML = `
+    overlay.classList.remove("hidden");
+  };
+  window.openSpaSchedule = function () {
+    overlayBody.innerHTML = `
             <h2 class="expanded-detail-title">Tranquility Spa Schedule</h2>
             <p class="expanded-detail-text">View today's available wellness sessions.</p>
-            
             <div class="spa-schedule-container">
                 <table class="spa-schedule">
                     <thead>
@@ -274,72 +226,121 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p style="font-size: 0.9rem; color: var(--color-text-light); text-align: center; margin-top: 1rem;">For private sessions or custom packages, please contact the Spa Concierge directly from your room phone (Dial 4).</p>
             </div>
         `;
-        overlay.classList.remove('hidden');
-    };
-
-    function openAttractionOverlay(data) {
-        let actionHTML = '';
-        if (data.action === 'Get Directions' || data.action === 'View Map') {
-            actionHTML = `
+    overlay.classList.remove("hidden");
+  };
+  function openAttractionOverlay(data) {
+    let actionHTML = "";
+    if (data.action === "Get Directions" || data.action === "View Map") {
+      actionHTML = `
                 <div class="map-placeholder">Interactive Map View</div>
                 <p style="margin-bottom: 1rem;"><strong>Directions:</strong> Turn right out of the hotel lobby. Head straight for 2 blocks until you reach the coastal highway. The destination is clearly marked on your left.</p>
                 <button class="expanded-action" onclick="alert('Directions sent to your mobile device!'); document.getElementById('close-overlay').click();">Send to Mobile</button>
             `;
-        } else {
-            actionHTML = `<button class="expanded-action" onclick="alert('${data.action} request submitted.'); document.getElementById('close-overlay').click();">${data.action}</button>`;
-        }
-
-        overlayBody.innerHTML = `
-            <img src="${data.img}" alt="${data.title}" class="expanded-detail-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%23A2B9C3\\'/></svg>'">
+    } else {
+      actionHTML = `<button class="expanded-action" onclick="alert('${data.action} request submitted.'); document.getElementById('close-overlay').click();">${data.action}</button>`;
+    }
+    overlayBody.innerHTML = `
+            <img src="${data.img}" alt="${data.title}" class="expanded-detail-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%231A1D20\\'/></svg>'">
             <h2 class="expanded-detail-title">${data.title}</h2>
             <p class="expanded-detail-text">${data.fullDesc}</p>
             ${actionHTML}
         `;
-        overlay.classList.remove('hidden');
-    }
-
-    // -------------------------------------------------------------------------
-    // 5. Room Service Logic
-    // -------------------------------------------------------------------------
-
-    const roomServiceMenu = {
-        'breakfast': [
-            { id: 'm1', name: 'Classic American Breakfast', desc: 'Two eggs any style, bacon or sausage, hash browns, and toast.', price: 24.00 },
-            { id: 'm2', name: 'Avocado Toast', desc: 'Smashed avocado on artisanal sourdough, poached egg, chili flakes.', price: 18.00 },
-            { id: 'm3', name: 'Buttermilk Pancakes', desc: 'Stack of three pancakes, seasonal berries, maple syrup.', price: 16.00 }
-        ],
-        'all-day': [
-            { id: 'm4', name: 'Club Sandwich', desc: 'Roasted turkey, bacon, lettuce, tomato, mayo on toasted brioche.', price: 22.00 },
-            { id: 'm5', name: 'Wagyu Beef Burger', desc: '8oz Wagyu patty, aged cheddar, caramelized onions, truffle fries.', price: 28.00 },
-            { id: 'm6', name: 'Caesar Salad', desc: 'Romaine, parmesan, garlic croutons. Add grilled chicken (+$6).', price: 16.00 },
-            { id: 'm7', name: 'Margarita Pizza', desc: 'Fresh mozzarella, tomato sauce, basil, olive oil.', price: 20.00 }
-        ],
-        'beverages': [
-            { id: 'm8', name: 'Fresh Orange Juice', desc: 'Freshly squeezed daily.', price: 8.00 },
-            { id: 'm9', name: 'Artisan Coffee', desc: 'Locally roasted drip coffee or espresso.', price: 6.00 },
-            { id: 'm10', name: 'Sparkling Water', desc: 'San Pellegrino or Perrier 500ml.', price: 5.00 },
-            { id: 'm11', name: 'Craft Beer', desc: 'Selection of local IPAs and lagers.', price: 9.00 }
-        ]
-    };
-
-    let cart = [];
-    const menuItemsContainer = document.querySelector('.menu-items-container');
-    const cartItemsContainer = document.getElementById('cart-items');
-    const cartTotalPrice = document.getElementById('cart-total-price');
-
-    window.showMenuCat = function(category) {
-        // Update active button state
-        document.querySelectorAll('.menu-cat-btn').forEach(btn => btn.classList.remove('active'));
-        event.currentTarget.classList.add('active');
-
-        // Render items
-        menuItemsContainer.innerHTML = '';
-        const items = roomServiceMenu[category] || [];
-        
-        items.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'menu-item-card';
-            card.innerHTML = `
+    overlay.classList.remove("hidden");
+  }
+  // -------------------------------------------------------------------------
+  // 5. Room Service Logic
+  // -------------------------------------------------------------------------
+  const roomServiceMenu = {
+    breakfast: [
+      {
+        id: "m1",
+        name: "Classic American Breakfast",
+        desc: "Two eggs any style, bacon or sausage, hash browns, and toast.",
+        price: 24.0,
+      },
+      {
+        id: "m2",
+        name: "Avocado Toast",
+        desc: "Smashed avocado on artisanal sourdough, poached egg, chili flakes.",
+        price: 18.0,
+      },
+      {
+        id: "m3",
+        name: "Buttermilk Pancakes",
+        desc: "Stack of three pancakes, seasonal berries, maple syrup.",
+        price: 16.0,
+      },
+    ],
+    "all-day": [
+      {
+        id: "m4",
+        name: "Club Sandwich",
+        desc: "Roasted turkey, bacon, lettuce, tomato, mayo on toasted brioche.",
+        price: 22.0,
+      },
+      {
+        id: "m5",
+        name: "Wagyu Beef Burger",
+        desc: "8oz Wagyu patty, aged cheddar, caramelized onions, truffle fries.",
+        price: 28.0,
+      },
+      {
+        id: "m6",
+        name: "Caesar Salad",
+        desc: "Romaine, parmesan, garlic croutons. Add grilled chicken (+$6).",
+        price: 16.0,
+      },
+      {
+        id: "m7",
+        name: "Margarita Pizza",
+        desc: "Fresh mozzarella, tomato sauce, basil, olive oil.",
+        price: 20.0,
+      },
+    ],
+    beverages: [
+      {
+        id: "m8",
+        name: "Fresh Orange Juice",
+        desc: "Freshly squeezed daily.",
+        price: 8.0,
+      },
+      {
+        id: "m9",
+        name: "Artisan Coffee",
+        desc: "Locally roasted drip coffee or espresso.",
+        price: 6.0,
+      },
+      {
+        id: "m10",
+        name: "Sparkling Water",
+        desc: "San Pellegrino or Perrier 500ml.",
+        price: 5.0,
+      },
+      {
+        id: "m11",
+        name: "Craft Beer",
+        desc: "Selection of local IPAs and lagers.",
+        price: 9.0,
+      },
+    ],
+  };
+  let cart = [];
+  const menuItemsContainer = document.querySelector(".menu-items-container");
+  const cartItemsContainer = document.getElementById("cart-items");
+  const cartTotalPrice = document.getElementById("cart-total-price");
+  window.showMenuCat = function (category) {
+    // Update active button state
+    document
+      .querySelectorAll(".menu-cat-btn")
+      .forEach((btn) => btn.classList.remove("active"));
+    event.currentTarget.classList.add("active");
+    // Render items
+    menuItemsContainer.innerHTML = "";
+    const items = roomServiceMenu[category] || [];
+    items.forEach((item) => {
+      const card = document.createElement("div");
+      card.className = "menu-item-card";
+      card.innerHTML = `
                 <div>
                     <h4>${item.name}</h4>
                     <p>${item.desc}</p>
@@ -351,35 +352,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     </button>
                 </div>
             `;
-            menuItemsContainer.appendChild(card);
-        });
-    };
-
-    window.addToCart = function(id, name, price) {
-        cart.push({ id, name, price });
-        updateCartUI();
-    };
-
-    window.removeFromCart = function(index) {
-        cart.splice(index, 1);
-        updateCartUI();
-    };
-
-    function updateCartUI() {
-        if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<p class="empty-cart">Cart is empty</p>';
-            cartTotalPrice.innerText = '$0.00';
-            return;
-        }
-
-        cartItemsContainer.innerHTML = '';
-        let total = 0;
-
-        cart.forEach((item, index) => {
-            total += item.price;
-            const cartEl = document.createElement('div');
-            cartEl.className = 'cart-item';
-            cartEl.innerHTML = `
+      menuItemsContainer.appendChild(card);
+    });
+  };
+  window.addToCart = function (id, name, price) {
+    cart.push({ id, name, price });
+    updateCartUI();
+  };
+  window.removeFromCart = function (index) {
+    cart.splice(index, 1);
+    updateCartUI();
+  };
+  function updateCartUI() {
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = '<p class="empty-cart">Cart is empty</p>';
+      cartTotalPrice.innerText = "$0.00";
+      return;
+    }
+    cartItemsContainer.innerHTML = "";
+    let total = 0;
+    cart.forEach((item, index) => {
+      total += item.price;
+      const cartEl = document.createElement("div");
+      cartEl.className = "cart-item";
+      cartEl.innerHTML = `
                 <div class="cart-item-info">
                     <span class="cart-item-name">${item.name}</span>
                     <span class="cart-item-price">$${item.price.toFixed(2)}</span>
@@ -388,26 +384,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     <i class="fa-solid fa-trash-can"></i>
                 </button>
             `;
-            cartItemsContainer.appendChild(cartEl);
-        });
-
-        cartTotalPrice.innerText = '$' + total.toFixed(2);
+      cartItemsContainer.appendChild(cartEl);
+    });
+    cartTotalPrice.innerText = "$" + total.toFixed(2);
+  }
+  window.placeOrder = function () {
+    if (cart.length === 0) {
+      alert("Your cart is empty. Please add items before placing an order.");
+      return;
     }
-
-    window.placeOrder = function() {
-        if (cart.length === 0) {
-            alert('Your cart is empty. Please add items before placing an order.');
-            return;
-        }
-        
-        // In a real app, this would send an API request
-        alert(`Order Placed Successfully! Your total of $${cart.reduce((a,b)=>a+b.price, 0).toFixed(2)} will be charged to your room. It will arrive in approximately 30 minutes.`);
-        
-        // Clear cart
-        cart = [];
-        updateCartUI();
-    };
-
-    // Initialize default menu category
-    showMenuCat('breakfast');
+    // In a real app, this would send an API request
+    alert(
+      `Order Placed Successfully! Your total of $${cart.reduce((a, b) => a + b.price, 0).toFixed(2)} will be charged to your room. It will arrive in approximately 30 minutes.`,
+    );
+    // Clear cart
+    cart = [];
+    updateCartUI();
+  };
+  // Initialize default menu category
+  showMenuCat("breakfast");
 });
