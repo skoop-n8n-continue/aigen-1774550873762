@@ -1021,42 +1021,43 @@ button {
 .countdown-section {
     display: flex;
     justify-content: center;
-    margin-bottom: 2rem;
-    padding: 1rem 0;
+    align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
 .countdown-container {
     text-align: center;
     background: rgba(212, 175, 55, 0.1);
     border: 1px solid var(--color-accent-blue);
-    padding: 2rem 4rem;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    padding: 0.5rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
 }
 
 .countdown-container h3 {
     color: var(--color-accent-blue);
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
     text-transform: uppercase;
 }
 
 .countdown-timer {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 0.5rem;
 }
 
 .time-box {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 80px;
+    min-width: 40px;
 }
 
 .time-box span:first-child {
-    font-size: 3.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: var(--color-text-slate);
     font-family: var(--font-heading);
@@ -1064,19 +1065,18 @@ button {
 }
 
 .time-label {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     color: var(--color-accent-blue);
     letter-spacing: 1px;
-    margin-top: 0.5rem;
+    margin-top: 0.2rem;
 }
 
 .colon {
-    font-size: 3rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: var(--color-accent-blue);
-    margin-top: -1.5rem;
-    animation: pulse 1s infinite alternate;
+    margin-top: -0.8rem;
 }
 
 @keyframes pulse {

@@ -59,14 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateCountdown() {
         if (!cdDays) return;
         const now = new Date();
-        const nextYear = new Date(now.getFullYear() + 1, 0, 1);
-        const diff = nextYear - now;
+        const nextMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+        const diff = nextMidnight - now;
 
         if (diff <= 0) {
-            cdDays.textContent = '00';
-            cdHours.textContent = '00';
-            cdMins.textContent = '00';
-            cdSecs.textContent = '00';
+            cdDays.textContent = "00";
+            cdHours.textContent = "00";
+            cdMins.textContent = "00";
+            cdSecs.textContent = "00";
             return;
         }
 
@@ -75,10 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-        cdDays.textContent = days.toString().padStart(2, '0');
-        cdHours.textContent = hours.toString().padStart(2, '0');
-        cdMins.textContent = minutes.toString().padStart(2, '0');
-        cdSecs.textContent = seconds.toString().padStart(2, '0');
+        cdDays.textContent = days.toString().padStart(2, "0");
+        cdHours.textContent = hours.toString().padStart(2, "0");
+        cdMins.textContent = minutes.toString().padStart(2, "0");
+        cdSecs.textContent = seconds.toString().padStart(2, "0");
     }
 
     updateCountdown();
