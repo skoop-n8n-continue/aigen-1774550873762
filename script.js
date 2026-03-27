@@ -30,22 +30,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateTimeBasedUI(currentHour) {
-        let greeting = 'Congratulations,';
-        // Define gradients based on time of day
-        let bgGradient = 'linear-gradient(135deg, #FCFBF9 0%, rgba(244,208,208,0.4) 100%)'; // Default / Morning Blush
+        let greeting = 'Good Morning,';
+        if (currentHour >= 12 && currentHour < 17) greeting = 'Good Afternoon,';
+        else if (currentHour >= 17 && currentHour < 21) greeting = 'Good Evening,';
+        else if (currentHour >= 21 || currentHour < 5) greeting = 'Good Night,';
 
-        if (currentHour >= 5 && currentHour < 12) {
-            bgGradient = 'linear-gradient(135deg, #FCFBF9 0%, rgba(244,208,208,0.5) 100%)'; // Morning Blush
-        } else if (currentHour >= 12 && currentHour < 17) {
-            bgGradient = 'linear-gradient(135deg, #FCFBF9 0%, rgba(212,175,55,0.15) 100%)'; // Afternoon Gold
-        } else if (currentHour >= 17 && currentHour < 21) {
-            bgGradient = 'linear-gradient(135deg, #F0E6E6 0%, rgba(140,120,130,0.3) 100%)'; // Dusk Mauve
-        } else {
-            bgGradient = 'linear-gradient(135deg, rgba(40,35,45,1) 0%, rgba(20,15,25,1) 100%)'; // Deep Night
-            document.body.style.color = '#F9F8F6';
-            document.querySelector('.greeting-name').style.color = '#D4AF37'; // Gold text at night
-            timeElement.style.color = '#F9F8F6';
-        }
+        let bgGradient = 'linear-gradient(135deg, #10181f 0%, #1a252f 100%)'; // Deep NYE Slate
+        document.body.style.color = '#F9F8F6';
+        document.querySelector('.greeting-name').style.color = '#D4AF37'; // Gold
+        timeElement.style.color = '#F9F8F6';
 
         greetingElement.textContent = greeting;
         bgElement.style.background = bgGradient;
@@ -54,6 +47,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize and set interval
     updateDateTime();
     setInterval(updateDateTime, 60000); // Update every minute
+
+    // -------------------------------------------------------------------------
+    // 1.5 NYE Countdown Logic
+    // -------------------------------------------------------------------------
+    const cdDays = document.getElementById('cd-days');
+    const cdHours = document.getElementById('cd-hours');
+    const cdMins = document.getElementById('cd-mins');
+    const cdSecs = document.getElementById('cd-secs');
+
+    function updateCountdown() {
+        if (!cdDays) return;
+        const now = new Date();
+        const nextMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+        const diff = nextMidnight - now;
+
+        if (diff <= 0) {
+            cdDays.textContent = "00";
+            cdHours.textContent = "00";
+            cdMins.textContent = "00";
+            cdSecs.textContent = "00";
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        cdDays.textContent = days.toString().padStart(2, "0");
+        cdHours.textContent = hours.toString().padStart(2, "0");
+        cdMins.textContent = minutes.toString().padStart(2, "0");
+        cdSecs.textContent = seconds.toString().padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
 
     // -------------------------------------------------------------------------
     // 2. View Navigation Logic
@@ -96,27 +126,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const attractions = [
         {
             id: 'attr-1',
-            title: 'Sunset Sailing',
-            desc: 'Private catamaran cruise on the bay.',
-            img: 'assets/sailing.jpg',
-            fullDesc: 'Embark on a luxurious 2-hour private catamaran cruise. Enjoy complimentary champagne and hors d\'oeuvres while you watch the sun dip below the horizon.',
-            action: 'Check Availability'
+            title: 'Midnight Fireworks',
+            desc: 'Spectacular display over the bay.',
+            img: 'https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1774550873762%2Fassets%2Ffireworks-1774579129971.png',
+            fullDesc: 'Join us on the terrace or view from your room as we light up the sky with a world-class fireworks display to ring in the New Year. The show begins exactly at midnight.',
+            action: 'View Schedule'
         },
         {
             id: 'attr-2',
-            title: 'Couples Spa Package',
-            desc: 'Ultimate relaxation for two.',
-            img: 'assets/spa.jpg',
-            fullDesc: 'Indulge in a 90-minute couples massage followed by exclusive access to the private thermal suite, complete with champagne and chocolate-covered strawberries.',
-            action: 'Book Spa'
+            title: 'Champagne Toast',
+            desc: 'Complimentary Moët & Chandon.',
+            img: 'https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1774550873762%2Fassets%2Fchampagne-1774579153070.png',
+            fullDesc: 'Enjoy a complimentary glass of vintage champagne at our grand lobby countdown. We will be pouring starting at 11:30 PM.',
+            action: 'RSVP'
         },
         {
             id: 'attr-3',
-            title: 'Candlelit Dining',
-            desc: 'Private beachside dinner under the stars.',
-            img: 'assets/dining.jpg',
-            fullDesc: 'A private table set on the beach with a curated 5-course tasting menu and wine pairing, served by a dedicated private butler as the waves crash nearby.',
-            action: 'Reserve Table'
+            title: 'NYE Party Favors',
+            desc: 'Get your hats and noisemakers.',
+            img: 'https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1774550873762%2Fassets%2Ffavors-1774579175078.png',
+            fullDesc: 'We have prepared exclusive gift bags with elegant NYE party favors, including golden top hats, tiaras, and premium noisemakers. Available at the concierge desk.',
+            action: 'Request Delivery'
+        },
+        {
+            id: 'attr-4',
+            title: 'Live DJ Gala',
+            desc: 'Dance into the new year.',
+            img: 'https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1774550873762%2Fassets%2Fdj-1774579195362.png',
+            fullDesc: 'Experience the ultimate NYE party in our grand ballroom with a live international DJ, state-of-the-art laser light show, and premium open bar.',
+            action: 'Get Tickets'
         }
     ];
 
@@ -129,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.setAttribute('data-id', attr.id);
 
             card.innerHTML = `
-                <img src="${attr.img}" alt="${attr.title}" class="polaroid-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%23F4D0D0\\'/></svg>'">
+                <img src="${attr.img}" alt="${attr.title}" class="polaroid-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%23A2B9C3\\'/></svg>'">
                 <h4 class="polaroid-title">${attr.title}</h4>
                 <p class="polaroid-desc">${attr.desc}</p>
             `;
@@ -252,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         overlayBody.innerHTML = `
-            <img src="${data.img}" alt="${data.title}" class="expanded-detail-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%23F4D0D0\\'/></svg>'">
+            <img src="${data.img}" alt="${data.title}" class="expanded-detail-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'100\\'><rect width=\\'100\\' height=\\'100\\' fill=\\'%23A2B9C3\\'/></svg>'">
             <h2 class="expanded-detail-title">${data.title}</h2>
             <p class="expanded-detail-text">${data.fullDesc}</p>
             ${actionHTML}
